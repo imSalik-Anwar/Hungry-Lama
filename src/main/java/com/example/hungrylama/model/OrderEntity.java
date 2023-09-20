@@ -23,6 +23,7 @@ public class OrderEntity {
     @Column(name = "order_id")
     int Id;
 
+    @Column(name = "unique_order_id")
     String orderId; // UUID
 
     @CreationTimestamp
@@ -30,22 +31,22 @@ public class OrderEntity {
 
     // relations ===========================================
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "customer_id")
     Customer customer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     Basket basket;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "restaurant_id")
     Restaurant restaurant;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<FoodItem> foodItems = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn
-    DeliverPartner deliverPartner;
+    @JoinColumn(name = "delivery_partner_id")
+    DeliverPartner deliveryPartner;
 
     @OneToOne(mappedBy = "order", cascade =  CascadeType.ALL)
     Bill bill;

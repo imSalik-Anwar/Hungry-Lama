@@ -32,6 +32,6 @@ public class Bill {
 
     // relations ================================================
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "order_id")
     OrderEntity order;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data // includes @getter, @setter, @toString and @reqArgConstructor
-@Table(name = "deliver_partner")
+@Table(name = "delivery_partner")
 public class DeliverPartner {
 
     @Id
@@ -28,6 +28,7 @@ public class DeliverPartner {
     @Column(unique = true, nullable = false)
     String contactNumber;
 
+    @Enumerated(EnumType.STRING)
     Gender gender;
 
     // relations ============================================

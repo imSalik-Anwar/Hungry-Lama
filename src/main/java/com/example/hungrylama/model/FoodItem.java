@@ -32,14 +32,14 @@ public class FoodItem {
 
     // relations ================================================
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "restaurant_id")
     Restaurant restaurant;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "order_id")
     OrderEntity order;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "basket_id")
     Basket basket;
 }

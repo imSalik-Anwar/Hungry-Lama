@@ -32,6 +32,7 @@ public class Customer {
     @Column(unique = true)
     String email;
 
+    @Enumerated(EnumType.STRING)
     Gender gender;
 
     @Size(min = 6, max = 6)
