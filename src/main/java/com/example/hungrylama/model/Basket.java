@@ -22,6 +22,8 @@ public class Basket {
     @Column(name = "basket_id")
     int Id;
 
+    double basketValue;
+
     // relations ==========================================
     @OneToOne
     @JoinColumn(name = "customer_id")

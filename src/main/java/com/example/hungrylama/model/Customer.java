@@ -35,7 +35,11 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     Gender gender;
 
-    @Size(min = 6, max = 6)
+    @Size(min = 6, message = "{validation.password.size.too_short}")
+    @Size(max = 12, message = "{validation.password.size.too_long}")
+    @Column(nullable = false)
+    String password;
+
     int zipCode;
 
     String city;

@@ -23,6 +23,8 @@ public class FoodItem {
     @Size(min = 1, max = 20)
     String dishName;
 
+    double price;
+
     @Enumerated(EnumType.STRING)
     FoodCategory category;
 
@@ -35,9 +37,10 @@ public class FoodItem {
     @JoinColumn(name = "restaurant_id")
     Restaurant restaurant;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "order_id")
     OrderEntity order;
+    */
 
     @ManyToOne
     @JoinColumn(name = "basket_id")
