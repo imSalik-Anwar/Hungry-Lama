@@ -9,8 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FoodItemResponse {
-
+public class FoodItemResponseWithRestName{
     String dishName;
 
     double price;
@@ -18,4 +17,6 @@ public class FoodItemResponse {
     boolean available;
 
     FoodCategory category;
+
+    String restaurantName;
 }

@@ -27,20 +27,15 @@ public class CustomerConverter {
         // get customer's basket
         Basket basket = customer.getBasket();
         // get his food item list and convert it to food response list for adding into customer response DTO
-        List<FoodItem> list = basket.getFoodItems();
-        List<FoodItemResponse> list2 = new ArrayList<>();
-        for(FoodItem item : list){
-            FoodItemResponse response = FoodItemResponse.builder()
-                    .dishName(item.getDishName())
-                    .price(item.getPrice())
-                    .category(item.getCategory())
-                    .build();
-            list2.add(response);
+        List<FoodItemResponse> menu = new ArrayList<>();
+        for (FoodItem foodItem : basket.getFoodItems()) {
+            FoodItemResponse response = FoodItemConverter.fromFoodItemToFoodItemResponse(foodItem);
+            menu.add(response);
         }
         // now prepare the basket response
         BasketResponse basketResponse = BasketResponse.builder()
                 .basketValue(basket.getBasketValue())
-                .foodItems(list2)
+                .foodItems(menu)
                 .build();
         // set all the values to response customer
         return CustomerResponse.builder()

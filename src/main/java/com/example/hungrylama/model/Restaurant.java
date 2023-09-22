@@ -31,16 +31,20 @@ public class Restaurant {
     @Size(min = 10, max = 10)
     String contactNumber;
 
+    String location;
+
+    int zipCode;
+
     @Enumerated(EnumType.STRING)
     RestaurantCategory restaurantCategory;
 
-    boolean isOpen;
+    boolean open;
 
     // restaurant =====================================
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    List<OrderEntity> orders = new ArrayList<>();
+    List<FoodItem> menu = new ArrayList<>();
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    List<FoodItem> menu = new ArrayList<>();
+    List<OrderEntity> orders = new ArrayList<>();
 
 }

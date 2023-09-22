@@ -14,7 +14,7 @@ public class MailComposer {
                 +"Password: "+customer.getPassword()+"\n"
                 +"Address: "+customer.getZipCode()+", "+customer.getCity()+"\n"
                 +"\n"
-                +"We strongly recommend you to keep your password safe. Otherwise some else will eat from your basket on your pocket :):";
+                +"We strongly recommend you to keep your password safe. Otherwise someone else will eat from your basket on your pocket :):";
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("hungryllama.service@gmail.com");

@@ -38,8 +38,8 @@ public class CustomerService {
         customer.setBasket(basket);
         // save customer and send email
         Customer savedCustomer = customerRepository.save(customer);
-        SimpleMailMessage message = MailComposer.composeCustomerRegistrationMail(savedCustomer);
-        javaMailSender.send(message);
+        // SimpleMailMessage message = MailComposer.composeCustomerRegistrationMail(savedCustomer);
+        // javaMailSender.send(message);
         // convert model to DTO
         return CustomerConverter.fromCustomerToCustomerResponse(savedCustomer);
     }

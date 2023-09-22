@@ -5,5 +5,4 @@ public enum RestaurantCategory {
     SELF_SERVICE,
     FAST_FOOD,
     CAFE,
-    FAMILY
 }
