@@ -25,14 +25,14 @@ public class CustomerService {
     }
     @Autowired
     JavaMailSender javaMailSender;
-    public CustomerResponse addNewCustomer(CustomerRequest customerRequest) throws Exception{
+    public CustomerResponse addNewCustomer(CustomerRequest customerRequest) throws Exception {
         // convert DTO to model
         Customer customer = CustomerConverter.fromCustomerRequestToCustomer(customerRequest);
         // Initialize a new basket for a new customer
         Basket basket = Basket.builder()
                 .customer(customer)
+                .basketItemList(new ArrayList<>())
                 .basketValue(0)
-                .foodItems(new ArrayList<>())
                 .build();
         // set basket to the customer
         customer.setBasket(basket);

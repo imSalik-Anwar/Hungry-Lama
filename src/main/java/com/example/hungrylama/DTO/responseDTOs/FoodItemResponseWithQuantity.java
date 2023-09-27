@@ -1,18 +1,23 @@
 package com.example.hungrylama.DTO.responseDTOs;
 
+import com.example.hungrylama.Enum.FoodCategory;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import java.util.List;
-import java.util.ArrayList;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasketResponse {
+public class FoodItemResponseWithQuantity {
 
-    double basketValue;
+    String dishName;
 
-    List<FoodItemResponseWithQuantity> foodItems = new ArrayList<>();
+    double price;
+
+    boolean available;
+
+    int quantity;
+
+    FoodCategory category;
 }

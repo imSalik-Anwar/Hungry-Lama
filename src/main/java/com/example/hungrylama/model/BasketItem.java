@@ -2,12 +2,8 @@ package com.example.hungrylama.model;
 
 import com.example.hungrylama.Enum.FoodCategory;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
@@ -15,15 +11,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data // includes @getter, @setter, @toString and @reqArgConstructor
-@Table(name = "food_item")
-public class FoodItem {
+@Table(name = "basket_item")
+public class BasketItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "food_id")
     int Id;
 
-    @Size(min = 1, max = 20)
     String dishName;
 
     double price;
@@ -35,11 +30,13 @@ public class FoodItem {
 
     boolean available;
 
-    // relations ================================================
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    Restaurant restaurant;
+    int quantity;
 
-    @OneToMany(mappedBy = "foodItem", cascade = CascadeType.ALL)
-    List<BasketItem> basketItemList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "basket_id")
+    Basket basket;
+
+    @ManyToOne
+    @JoinColumn(name = "food_item_id")
+    FoodItem foodItem;
 }

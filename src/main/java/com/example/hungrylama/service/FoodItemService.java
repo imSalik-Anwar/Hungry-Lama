@@ -47,13 +47,13 @@ public class FoodItemService {
             throw new RestaurantNotFoundException("Restaurant with name "+name+" does not exists.");
         }
         Restaurant restaurant = restaurantOptional.get();
-        List<FoodItem> list = foodItemRepository.findAll();
+        List<FoodItem> list = restaurant.getMenu();
         if(list.isEmpty()){
             throw new FoodItemNotFoundException("There is no veg food in "+name+"'s menu.");
         }
         List<FoodItemResponse> responses = new ArrayList<>();
         for (FoodItem foodItem : list){
-            if(foodItem.isVeg() && restaurant.getName().equals(name)) {
+            if(foodItem.isVeg()){
                 FoodItemResponse foodItemResponse = FoodItemConverter.fromFoodItemToFoodItemResponse(foodItem);
                 responses.add(foodItemResponse);
             }

@@ -34,6 +34,5 @@ public class Basket {
     OrderEntity order;
 
     @OneToMany(mappedBy = "basket", cascade = CascadeType.ALL)
-    List<FoodItem> foodItems = new ArrayList<>();
-
+    List<BasketItem> basketItemList = new ArrayList<>();
 }

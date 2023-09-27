@@ -4,7 +4,9 @@ import com.example.hungrylama.DTO.requestDTOs.CustomerRequest;
 import com.example.hungrylama.DTO.responseDTOs.BasketResponse;
 import com.example.hungrylama.DTO.responseDTOs.CustomerResponse;
 import com.example.hungrylama.DTO.responseDTOs.FoodItemResponse;
+import com.example.hungrylama.DTO.responseDTOs.FoodItemResponseWithQuantity;
 import com.example.hungrylama.model.Basket;
+import com.example.hungrylama.model.BasketItem;
 import com.example.hungrylama.model.Customer;
 import com.example.hungrylama.model.FoodItem;
 
@@ -27,9 +29,9 @@ public class CustomerConverter {
         // get customer's basket
         Basket basket = customer.getBasket();
         // get his food item list and convert it to food response list for adding into customer response DTO
-        List<FoodItemResponse> menu = new ArrayList<>();
-        for (FoodItem foodItem : basket.getFoodItems()) {
-            FoodItemResponse response = FoodItemConverter.fromFoodItemToFoodItemResponse(foodItem);
+        List<FoodItemResponseWithQuantity> menu = new ArrayList<>();
+        for (BasketItem basketItem : basket.getBasketItemList()) {
+            FoodItemResponseWithQuantity response = FoodItemConverter.fromBasketItemToFoodItemResponseWithQuantity(basketItem);
             menu.add(response);
         }
         // now prepare the basket response

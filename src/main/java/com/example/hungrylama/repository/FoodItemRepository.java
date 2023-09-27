@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface FoodItemRepository extends JpaRepository<FoodItem, Integer> {
     List<FoodItem> findByCategory(FoodCategory category);
 
-//    @Query(value = "Select f from FoodItem f Where f.veg = true");
-//    List<FoodItem> findIfVeg();
 
+    Optional<FoodItem> findByDishName(String dishName);
 }
