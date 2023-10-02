@@ -39,4 +39,8 @@ public class BasketItem {
     @ManyToOne
     @JoinColumn(name = "food_item_id")
     FoodItem foodItem;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    OrderEntity order;
 }

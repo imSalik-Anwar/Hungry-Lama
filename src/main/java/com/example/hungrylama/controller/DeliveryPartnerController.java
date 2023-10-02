@@ -18,9 +18,9 @@ public class DeliveryPartnerController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity addDeliverPartner(@RequestBody DeliveryPartnerRequest deliveryPartnerRequest){
+    public ResponseEntity addDeliveryPartner(@RequestBody DeliveryPartnerRequest deliveryPartnerRequest){
         try{
-            DeliveryPartnerResponse response = deliveryPartnerService.addDeliverPartner(deliveryPartnerRequest);
+            DeliveryPartnerResponse response = deliveryPartnerService.addDeliveryPartner(deliveryPartnerRequest);
             return new ResponseEntity(response, HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);

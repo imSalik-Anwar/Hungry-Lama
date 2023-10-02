@@ -20,7 +20,7 @@ public class DeliveryPartnerService {
         this.deliveryPartnerRepository = deliveryPartnerRepository;
     }
 
-    public DeliveryPartnerResponse addDeliverPartner(DeliveryPartnerRequest deliveryPartnerRequest) {
+    public DeliveryPartnerResponse addDeliveryPartner(DeliveryPartnerRequest deliveryPartnerRequest) {
         // check if delivery partner already exists
         Optional<DeliveryPartner> deliverPartnerOptional = deliveryPartnerRepository.findByContactNumber(deliveryPartnerRequest.getContact());
         if(deliverPartnerOptional.isPresent()){
