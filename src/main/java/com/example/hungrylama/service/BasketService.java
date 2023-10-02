@@ -14,6 +14,7 @@ import com.example.hungrylama.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -133,10 +134,15 @@ public class BasketService {
             throw new EmptyBasketException("Your basket is already clean.");
         }
         // clear the basket
-        for(BasketItem basketItem : customer.getBasket().getBasketItemList()){
+        Basket basket = customer.getBasket();
+        List<BasketItem> basketItemList = basket.getBasketItemList();
+        for(BasketItem basketItem : basketItemList){
+            basketItem.setFoodItem(null);
+            basketItem.setBasket(null);
             basketItemRepository.delete(basketItem);
         }
-        customer.getBasket().getBasketItemList().clear();
+        basket.getBasketItemList().clear();
+        basket.setBasketValue(0);
         basketRepository.save(customer.getBasket());
         customerRepository.save(customer);
     }
