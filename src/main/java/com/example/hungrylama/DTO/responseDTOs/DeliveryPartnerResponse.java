@@ -4,6 +4,9 @@ import com.example.hungrylama.Enum.Gender;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
@@ -18,4 +21,6 @@ public class DeliveryPartnerResponse {
     String contact;
 
     Gender gender;
+
+    List<OrderResponseForDeliveryPartner> orders = new ArrayList<>();
 }

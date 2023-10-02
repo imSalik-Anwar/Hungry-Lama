@@ -35,4 +35,14 @@ public class DeliveryPartnerController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("see-orders/contact/{contact}")
+    public ResponseEntity seeAllOrders(@PathVariable("contact") String contact){
+        try{
+            DeliveryPartnerResponse response = deliveryPartnerService.seeAllOrders(contact);
+            return new ResponseEntity(response, HttpStatus.FOUND);
+        } catch (Exception e){
+            return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }

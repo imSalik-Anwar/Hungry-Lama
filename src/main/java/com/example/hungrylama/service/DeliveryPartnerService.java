@@ -4,6 +4,7 @@ import com.example.hungrylama.DTO.requestDTOs.DeliveryPartnerRequest;
 import com.example.hungrylama.DTO.responseDTOs.DeliveryPartnerResponse;
 import com.example.hungrylama.converter.DeliverPartnerConverter;
 import com.example.hungrylama.exception.DeliveryPartnerAlreadyExistsException;
+import com.example.hungrylama.exception.DeliveryPartnerNotFoundException;
 import com.example.hungrylama.exception.FoodItemNotFoundException;
 import com.example.hungrylama.model.DeliveryPartner;
 import com.example.hungrylama.repository.DeliveryPartnerRepository;
@@ -39,11 +40,20 @@ public class DeliveryPartnerService {
         }
         Optional<DeliveryPartner> deliveryPartnerOptional = deliveryPartnerRepository.findByContactNumber(oldContact);
         if(deliveryPartnerOptional.isEmpty()){
-            throw new FoodItemNotFoundException("Delivery Partner does not exists.");
+            throw new DeliveryPartnerNotFoundException("Delivery Partner does not exists.");
         }
         DeliveryPartner deliveryPartner = deliveryPartnerOptional.get();
         deliveryPartner.setContactNumber(newContact);
         deliveryPartnerRepository.save(deliveryPartner);
         return "Your contact has been changed from ["+oldContact+"] to ["+newContact+"]";
+    }
+
+    public DeliveryPartnerResponse seeAllOrders(String contact) {
+        Optional<DeliveryPartner> deliveryPartnerOptional = deliveryPartnerRepository.findByContactNumber(contact);
+        if(deliveryPartnerOptional.isEmpty()){
+            throw new DeliveryPartnerNotFoundException("Delivery Partner does not exists.");
+        }
+        DeliveryPartner deliveryPartner = deliveryPartnerOptional.get();
+        return DeliverPartnerConverter.fromDeliverPartnerToDeliveryPartnerResponse(deliveryPartner);
     }
 }
