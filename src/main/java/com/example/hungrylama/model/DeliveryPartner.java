@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data // includes @getter, @setter, @toString and @reqArgConstructor
 @Table(name = "delivery_partner")
-public class DeliverPartner {
+public class DeliveryPartner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

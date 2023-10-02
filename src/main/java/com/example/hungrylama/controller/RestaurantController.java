@@ -48,4 +48,14 @@ public class RestaurantController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PutMapping("/update-dish-available-status")
+    public ResponseEntity<String> changeDishAvailableStatus(@RequestParam("restaurant") String restaurant, @RequestParam("dish") String dish){
+        try{
+            String response = restaurantService.changeDishAvailableStatus(restaurant, dish);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
 }

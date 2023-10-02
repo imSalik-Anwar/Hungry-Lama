@@ -5,9 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
@@ -44,7 +42,7 @@ public class OrderEntity {
 
     @ManyToOne
     @JoinColumn(name = "delivery_partner_id")
-    DeliverPartner deliveryPartner;
+    DeliveryPartner deliveryPartner;
 
     @OneToOne(mappedBy = "order", cascade =  CascadeType.ALL)
     Bill bill;
