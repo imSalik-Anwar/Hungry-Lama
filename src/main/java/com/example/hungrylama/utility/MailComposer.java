@@ -62,7 +62,7 @@ public class MailComposer {
                 +"Your Good Name: "+order.getCustomer().getName()+"\n"
                 +"Address: "+order.getCustomer().getZipCode()+", "+order.getCustomer().getCity()+"\n"
                 +"Order Id: "+order.getOrderId()+"\n"
-                +"Restaurant: "+order.getRestaurant().getName()+"\n"
+                +"Restaurant: "+order.getRestaurant().getName()+", "+order.getRestaurant().getLocation()+"\n"
                 +"Delivery Partner: "+order.getDeliveryPartner().getName()+"\n"
                 +"Delivery Partner Contact: "+order.getDeliveryPartner().getContactNumber()+"\n"
                 +"Amount Payable: "+order.getBill().getBillAmount()+"\n"
