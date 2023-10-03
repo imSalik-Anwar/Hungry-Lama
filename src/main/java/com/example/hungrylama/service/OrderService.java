@@ -116,8 +116,8 @@ public class OrderService {
         bill.setDiscount(discount);
         bill.setBillAmount(gstPlusOrderVal - discount);
         // send mail
-        SimpleMailMessage message = MailComposer.composeOrderPlacementMail(order);
-        javaMailSender.send(message);
+        // SimpleMailMessage message = MailComposer.composeOrderPlacementMail(order);
+        // javaMailSender.send(message);
         // prepare Order Response
         return OrderConverter.fromOrderDetailsToOrderResponse(order, bill, restaurant, customer);
     }
