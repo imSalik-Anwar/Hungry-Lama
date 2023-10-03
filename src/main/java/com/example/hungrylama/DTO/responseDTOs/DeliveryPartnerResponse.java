@@ -22,5 +22,7 @@ public class DeliveryPartnerResponse {
 
     Gender gender;
 
+    String email;
+
     List<OrderResponseForDeliveryPartner> orders = new ArrayList<>();
 }

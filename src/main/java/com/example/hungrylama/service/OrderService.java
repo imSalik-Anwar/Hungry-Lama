@@ -7,7 +7,10 @@ import com.example.hungrylama.exception.CustomerNotFoundException;
 import com.example.hungrylama.exception.EmptyBasketException;
 import com.example.hungrylama.model.*;
 import com.example.hungrylama.repository.*;
+import com.example.hungrylama.utility.MailComposer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,25 +23,27 @@ public class OrderService {
     final DeliveryPartnerRepository deliveryPartnerRepository;
     final BillRepository billRepository;
     final BasketRepository basketRepository;
+    final JavaMailSender javaMailSender;
 
     @Autowired
     public OrderService(OrderRepository orderRepository, CustomerRepository customerRepository,
                         DeliveryPartnerRepository deliveryPartnerRepository, BillRepository billRepository,
-                        BasketRepository basketRepository) {
+                        BasketRepository basketRepository, JavaMailSender javaMailSender) {
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
         this.deliveryPartnerRepository = deliveryPartnerRepository;
         this.billRepository = billRepository;
         this.basketRepository = basketRepository;
+        this.javaMailSender = javaMailSender;
     }
 
     public OrderResponse placeOrder(String email) {
-        // validate customer ======================================================
+        // validate customer ============================================================================
         Optional<Customer> customerOptional = customerRepository.findByEmail(email);
         if(customerOptional.isEmpty()){
             throw new CustomerNotFoundException("Invalid Customer");
         }
-        // if customer is valid, get customer, its basket and restaurant =============================
+        // if customer is valid, get customer, its basket and restaurant ================================
         Customer customer = customerOptional.get();
         Basket basket = customer.getBasket();
         // check if basket is empty or not
@@ -60,7 +65,6 @@ public class OrderService {
         // set relation with other entities ==============================================================
         customer.getOrders().add(order);
         order.setCustomer(customer);
-//        customerRepository.save(customer);
 
         basket.setOrder(order);
         order.setBasket(basket);
@@ -70,7 +74,6 @@ public class OrderService {
 
         deliveryPartner.getOrders().add(order);
         order.setDeliveryPartner(deliveryPartner);
-//        deliveryPartnerRepository.save(deliveryPartner);
 
         bill.setOrder(order);
         order.setBill(bill);
@@ -80,13 +83,11 @@ public class OrderService {
             order.getDishes().add(item);
             item.setBasket(null);
         }
-//        orderRepository.save(order);
         // clear basket and set basket value to zero
         double basketValue = basket.getBasketValue();
         basket.setBasketValue(0);
         basket.getBasketItemList().clear();
         customerRepository.save(customer);
-//        basketRepository.save(basket);
         // set bill values =====================================================================================================
         bill.setOrderValue(basketValue);
         bill.setGst((double)(0.05 * basketValue));
@@ -114,6 +115,9 @@ public class OrderService {
         }
         bill.setDiscount(discount);
         bill.setBillAmount(gstPlusOrderVal - discount);
+        // send mail
+        SimpleMailMessage message = MailComposer.composeOrderPlacementMail(order);
+        javaMailSender.send(message);
         // prepare Order Response
         return OrderConverter.fromOrderDetailsToOrderResponse(order, bill, restaurant, customer);
     }

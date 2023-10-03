@@ -16,6 +16,7 @@ public class DeliverPartnerConverter {
                 .name(deliveryPartnerRequest.getName())
                 .contactNumber(deliveryPartnerRequest.getContact())
                 .gender(deliveryPartnerRequest.getGender())
+                .email(deliveryPartnerRequest.getEmail())
                 .orders(new ArrayList<>())
                 .build();
     }
@@ -38,6 +39,7 @@ public class DeliverPartnerConverter {
                 .name(deliveryPartner.getName())
                 .contact(deliveryPartner.getContactNumber())
                 .gender(deliveryPartner.getGender())
+                .email(deliveryPartner.getEmail())
                 .orders(list)
                 .build();
     }

@@ -5,10 +5,12 @@ import com.example.hungrylama.DTO.responseDTOs.DeliveryPartnerResponse;
 import com.example.hungrylama.converter.DeliverPartnerConverter;
 import com.example.hungrylama.exception.DeliveryPartnerAlreadyExistsException;
 import com.example.hungrylama.exception.DeliveryPartnerNotFoundException;
-import com.example.hungrylama.exception.FoodItemNotFoundException;
 import com.example.hungrylama.model.DeliveryPartner;
 import com.example.hungrylama.repository.DeliveryPartnerRepository;
+import com.example.hungrylama.utility.MailComposer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,20 +18,26 @@ import java.util.Optional;
 @Service
 public class DeliveryPartnerService {
     final DeliveryPartnerRepository deliveryPartnerRepository;
+    final JavaMailSender javaMailSender;
     @Autowired
-    public DeliveryPartnerService(DeliveryPartnerRepository deliveryPartnerRepository) {
+    public DeliveryPartnerService(DeliveryPartnerRepository deliveryPartnerRepository, JavaMailSender javaMailSender) {
         this.deliveryPartnerRepository = deliveryPartnerRepository;
+        this.javaMailSender = javaMailSender;
     }
 
     public DeliveryPartnerResponse addDeliveryPartner(DeliveryPartnerRequest deliveryPartnerRequest) {
         // check if delivery partner already exists
-        Optional<DeliveryPartner> deliverPartnerOptional = deliveryPartnerRepository.findByContactNumber(deliveryPartnerRequest.getContact());
+        Optional<DeliveryPartner> deliverPartnerOptional = deliveryPartnerRepository.findByContactNumberOrEmail(deliveryPartnerRequest.getContact(),
+                deliveryPartnerRequest.getEmail());
         if(deliverPartnerOptional.isPresent()){
             throw new DeliveryPartnerAlreadyExistsException("Deliver partner with this contact already exists.");
         }
         // create new delivery partner
         DeliveryPartner deliveryPartner = DeliverPartnerConverter.fromDeliveryPartnerRequestToDeliveryPartner(deliveryPartnerRequest);
         DeliveryPartner savedDeliverPartner = deliveryPartnerRepository.save(deliveryPartner);
+        // send email
+        //SimpleMailMessage message = MailComposer.composeDeliverPartnerOnboardingMail(deliveryPartner);
+        //javaMailSender.send(message);
         return DeliverPartnerConverter.fromDeliverPartnerToDeliveryPartnerResponse(savedDeliverPartner);
     }
 

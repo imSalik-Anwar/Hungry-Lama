@@ -16,4 +16,6 @@ public class DeliveryPartnerRequest {
     String contact;
 
     Gender gender;
+
+    String email;
 }

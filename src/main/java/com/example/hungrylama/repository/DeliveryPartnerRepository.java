@@ -15,4 +15,6 @@ public interface DeliveryPartnerRepository extends JpaRepository<DeliveryPartner
     String query = "Select d From DeliveryPartner d Order By RAND() LIMIT 1";
     @Query(value = query)
     DeliveryPartner findRandom();
+
+    Optional<DeliveryPartner> findByContactNumberOrEmail(String contact, String email);
 }

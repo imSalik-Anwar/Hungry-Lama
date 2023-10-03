@@ -4,13 +4,16 @@ import com.example.hungrylama.DTO.responseDTOs.BillResponse;
 import com.example.hungrylama.DTO.responseDTOs.FoodItemResponseForOrder;
 import com.example.hungrylama.DTO.responseDTOs.OrderResponse;
 import com.example.hungrylama.model.*;
+import com.example.hungrylama.repository.BillRepository;
+import com.example.hungrylama.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderConverter {
-
     public static OrderResponse fromOrderDetailsToOrderResponse(OrderEntity order, Bill bill, Restaurant restaurant, Customer customer){
+
         List<FoodItemResponseForOrder> list = new ArrayList<>();
         for(BasketItem item : order.getDishes()){
             FoodItemResponseForOrder dish = new FoodItemResponseForOrder();

@@ -28,6 +28,9 @@ public class DeliveryPartner {
     @Column(unique = true, nullable = false)
     String contactNumber;
 
+    @Column(unique = true, nullable = false)
+    String email;
+
     @Enumerated(EnumType.STRING)
     Gender gender;
 
