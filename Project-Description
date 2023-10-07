@@ -1,0 +1,36 @@
+# Hungry-Llama
+
+**Description**
+1. Developed a dynamic and user-friendly food delivery application, "Hungry Llama," using Spring Boot, catering to the diverse needs of customers, restaurants, and delivery partners.
+2. Employed JPA/Hibernate for seamless database connectivity, with MySQL serving as the robust backend database system.
+3. Established essential relationships among entities, ensuring data consistency and reliability.
+4. Implemented core functionalities such as customer, restaurant, and delivery partner management, including the ability to add, update, and maintain their profiles.
+5. Enabled restaurants to showcase their menu items, manage dish availability, and maintain their operational status.
+6. Empowered customers to create orders, add dishes to their basket, and seamlessly place orders, with automatic bill generation for every transaction.
+7. Integrated an efficient mailing system, sending notifications to customers and delivery partners for added convenience.
+8. Leveraged Swagger for comprehensive API documentation, simplifying interaction and ensuring accessibility.
+
+**Key Technologies**
+1. Spring Boot
+2. JPA/Hibernate
+3. MySQL Database
+4. User Management
+5. Menu Item Management
+6. Order Processing
+7. Email Notifications
+8. Swagger Documentation
+
+**Impact/Benefits**
+1. Simplified and streamlined the food delivery process for customers, restaurants, and delivery partners.
+2. Enhanced data management and real-time order processing.
+3. Improved communication and convenience with automated email notifications.
+4. Facilitated user interaction with clear and accessible API documentation via Swagger.
+
+**Results/Outcomes**
+1. Efficient and user-friendly food delivery app catering to a wide range of users.
+2. Enhanced data accuracy and accessibility.
+3. Improved customer and partner engagement through automated notifications.
+4. Streamlined user interaction with comprehensive API documentation.
+5. 
+This project highlights my expertise in Spring Boot, database management, RESTful API development, and user-focused application design,
+resulting in a versatile and efficient food delivery platform.
